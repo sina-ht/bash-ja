@@ -4,13 +4,14 @@
 # Kyoichi Ozaki <k@afromania.org>, 2000.
 # Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>, 2011, 2013.
 # Yasuaki Taniguchi <yasuakit@gmail.com>, 2011, 2014, 2017.
+# Hiroshi Takekawa <sian@big.or.jp>, <sian.ht@gmail.com>, 2020.
 msgid ""
 msgstr ""
-"Project-Id-Version: GNU bash 4.4\n"
+"Project-Id-Version: GNU bash 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-28 12:51-0500\n"
-"PO-Revision-Date: 2017-07-02 01:46+0100\n"
-"Last-Translator: Yasuaki Taniguchi <yasuakit@gmail.com>\n"
+"POT-Creation-Date: 2020-12-10 12:17+0900\n"
+"PO-Revision-Date: 2020-12-12 15:45+0900\n"
+"Last-Translator: Hiroshi Takekawa <sian@big.or.jp>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -75,9 +76,9 @@ msgid "%s: missing colon separator"
 msgstr "%s: 区切り文字コロン(:)がありません"
 
 #: bashline.c:4555
-#, fuzzy, c-format
+#, c-format
 msgid "`%s': cannot unbind in command keymap"
-msgstr "`%s': 割り当て解除できません"
+msgstr "`%s': コマンドキーマップの割り当てを解除できません"
 
 #: braces.c:327
 #, c-format
@@ -85,11 +86,9 @@ msgid "brace expansion: cannot allocate memory for %s"
 msgstr "中括弧展開: %s へメモリを割り当てられません"
 
 #: braces.c:406
-#, fuzzy, c-format
+#, c-format
 msgid "brace expansion: failed to allocate memory for %u elements"
-msgstr ""
-"中括弧展開: failed to allocate memory for %d 要素のメモリの割り当てに失敗しま"
-"した"
+msgstr "中括弧展開: %u 個の要素のメモリの割り当てに失敗しました"
 
 #: braces.c:451
 #, c-format
@@ -144,7 +143,6 @@ msgid "only meaningful in a `for', `while', or `until' loop"
 msgstr "`for'、`while' または `until' ループでのみ意味があります"
 
 #: builtins/caller.def:136
-#, fuzzy
 msgid ""
 "Returns the context of the current subroutine call.\n"
 "    \n"
@@ -163,10 +161,7 @@ msgstr ""
 "    を提供する時に利用します。\n"
 "    \n"
 "    EXPR の値は現在のフレームに戻るまでに何回フレームが呼び出されているかを\n"
-"    意味します。最上位のフレームは 0 です。\n"
-"    \n"
-"    終了ステータス:\n"
-"    シェルが関数を実行できないか式 EXPR が無効な場合を除き 0 を返します。"
+"    意味します。最上位のフレームは 0 です。"
 
 #: builtins/cd.def:327
 msgid "HOME not set"
@@ -177,9 +172,8 @@ msgid "too many arguments"
 msgstr "引数が多すぎます"
 
 #: builtins/cd.def:342
-#, fuzzy
 msgid "null directory"
-msgstr "他のディレクトリはありません"
+msgstr "空のディレクトリ"
 
 #: builtins/cd.def:353
 msgid "OLDPWD not set"
@@ -425,9 +419,9 @@ msgid "cannot find %s in shared object %s: %s"
 msgstr "%s が共有オブジェクト %s に存在しません: %s"
 
 #: builtins/enable.def:388
-#, fuzzy, c-format
+#, c-format
 msgid "%s: dynamic builtin already loaded"
-msgstr "%s: 動的にロードされていません"
+msgstr "%s: 動的ビルトインはロード済です"
 
 #: builtins/enable.def:392
 #, c-format
@@ -545,6 +539,8 @@ msgid ""
 "'\n"
 "\n"
 msgstr ""
+"'\n"
+"\n"
 
 #: builtins/help.def:185
 #, c-format
@@ -1106,9 +1102,8 @@ msgid "attempted assignment to non-variable"
 msgstr "非変数に割り当てを行おうとしてます"
 
 #: expr.c:530
-#, fuzzy
 msgid "syntax error in variable assignment"
-msgstr "式に構文エラーがあります"
+msgstr "変数の割り当てに構文エラーがあります"
 
 #: expr.c:544 expr.c:911
 msgid "division by 0"
@@ -1152,9 +1147,8 @@ msgid "invalid arithmetic base"
 msgstr "無効な基底の数値です"
 
 #: expr.c:1582
-#, fuzzy
 msgid "invalid integer constant"
-msgstr "%s: 無効な行数です"
+msgstr "無効な整数定数です"
 
 #: expr.c:1598
 msgid "value too great for base"
@@ -1285,9 +1279,9 @@ msgid "wait_for_job: job %d is stopped"
 msgstr "wait_for_job: ジョブ %d は停止しています"
 
 #: jobs.c:3564
-#, fuzzy, c-format
+#, c-format
 msgid "%s: no current jobs"
-msgstr "%s: そのようなジョブはありません"
+msgstr "%s: カレントジョブがありません"
 
 #: jobs.c:3571
 #, c-format
@@ -1323,9 +1317,9 @@ msgid "initialize_job_control: getpgrp failed"
 msgstr "initialize_job_control: getpgrp が失敗しました"
 
 #: jobs.c:4447
-#, fuzzy
 msgid "initialize_job_control: no job control in background"
-msgstr "initialize_job_control: line discipline"
+msgstr ""
+"initialize_job_control: バックグラウンドにジョブコントロールがありません"
 
 #: jobs.c:4463
 msgid "initialize_job_control: line discipline"
@@ -1379,9 +1373,8 @@ msgid "free: underflow detected; mh_nbytes out of range"
 msgstr "free: アンダーフローを検出しました。 mh_nbytes が範囲外です"
 
 #: lib/malloc/malloc.c:1001
-#, fuzzy
 msgid "free: underflow detected; magic8 corrupted"
-msgstr "free: アンダーフローを検出しました。 mh_nbytes が範囲外です"
+msgstr "free: アンダーフローを検出しました。magic8 壊れています"
 
 #: lib/malloc/malloc.c:1009
 msgid "free: start and end chunk sizes differ"
@@ -1396,9 +1389,8 @@ msgid "realloc: underflow detected; mh_nbytes out of range"
 msgstr "realloc: アンダーフローを検出しました。 mh_nbytes が範囲外です"
 
 #: lib/malloc/malloc.c:1141
-#, fuzzy
 msgid "realloc: underflow detected; magic8 corrupted"
-msgstr "realloc: アンダーフローを検出しました。 mh_nbytes が範囲外です"
+msgstr "realloc: アンダーフローを検出しました。magic8 が壊れています"
 
 #: lib/malloc/malloc.c:1150
 msgid "realloc: start and end chunk sizes differ"
@@ -2011,9 +2003,9 @@ msgid "%s: invalid variable name for name reference"
 msgstr "%s: 名前参照として無効な変数です"
 
 #: subst.c:6979 subst.c:6997 subst.c:7169
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid indirect expansion"
-msgstr "%s: 無効な行数です"
+msgstr "%s: 無効な間接展開です"
 
 #: subst.c:7013 subst.c:7177
 #, c-format
@@ -2021,9 +2013,9 @@ msgid "%s: invalid variable name"
 msgstr "%s: 無効な変数名です"
 
 #: subst.c:7256
-#, fuzzy, c-format
+#, c-format
 msgid "%s: parameter not set"
-msgstr "%s: パラメータが null または設定されていません"
+msgstr "%s: パラメータが設定されていません"
 
 #: subst.c:7258
 #, c-format
@@ -2145,9 +2137,9 @@ msgid "%s: variable may not be assigned value"
 msgstr "%s: 変数が初期化されていないかもしれません"
 
 #: variables.c:3475
-#, fuzzy, c-format
+#, c-format
 msgid "%s: assigning integer to name reference"
-msgstr "%s: 名前参照として無効な変数です"
+msgstr "%s: 名前参照に整数を代入しようとしています"
 
 #: variables.c:4404
 msgid "all_local_variables: no function context at current scope"
@@ -2196,12 +2188,11 @@ msgstr "%s: %s: トレースファイル記述子として無効な値です"
 msgid "%s: %s: compatibility value out of range"
 msgstr "%s: %s: 値の互換性が範囲外です"
 
-#: version.c:46 version2.c:46
-#, fuzzy
+#: version.c:46
 msgid "Copyright (C) 2020 Free Software Foundation, Inc."
-msgstr "Copyright (C) 2012 Free Software Foundation, Inc."
+msgstr "Copyright (C) 2020 Free Software Foundation, Inc."
 
-#: version.c:47 version2.c:47
+#: version.c:47
 msgid ""
 "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl."
 "html>\n"
@@ -2209,16 +2200,16 @@ msgstr ""
 "ライセンス GPLv3+: GNU GPL バージョン 3 またはそれ以降 <http://gnu.org/"
 "licenses/gpl.html>\n"
 
-#: version.c:86 version2.c:86
+#: version.c:86
 #, c-format
 msgid "GNU bash, version %s (%s)\n"
 msgstr "GNU bash, バージョン %s (%s)\n"
 
-#: version.c:91 version2.c:91
+#: version.c:91
 msgid "This is free software; you are free to change and redistribute it."
 msgstr "This is free software; you are free to change and redistribute it."
 
-#: version.c:92 version2.c:92
+#: version.c:92
 msgid "There is NO WARRANTY, to the extent permitted by law."
 msgstr "There is NO WARRANTY, to the extent permitted by law."
 
@@ -2287,14 +2278,12 @@ msgid "command [-pVv] command [arg ...]"
 msgstr "command [-pVv] command [arg ...]"
 
 #: builtins.c:78
-#, fuzzy
 msgid "declare [-aAfFgiIlnrtux] [-p] [name[=value] ...]"
-msgstr "declare [-aAfFgilnrtux] [-p] [name[=value] ...]"
+msgstr "declare [-aAfFgiIlnrtux] [-p] [name[=value] ...]"
 
 #: builtins.c:80
-#, fuzzy
 msgid "typeset [-aAfFgiIlnrtux] [-p] name[=value] ..."
-msgstr "typeset [-aAfFgilnrtux] [-p] name[=value] ..."
+msgstr "typeset [-aAfFgiIlnrtux] [-p] name[=value] ..."
 
 #: builtins.c:82
 msgid "local [option] name[=value] ..."
@@ -2317,14 +2306,12 @@ msgid "eval [arg ...]"
 msgstr "eval [arg ...]"
 
 #: builtins.c:96
-#, fuzzy
 msgid "getopts optstring name [arg ...]"
-msgstr "getopts optstring name [arg]"
+msgstr "getopts optstring name [arg ...]"
 
 #: builtins.c:98
-#, fuzzy
 msgid "exec [-cl] [-a name] [command [argument ...]] [redirection ...]"
-msgstr "exec [-cl] [-a name] [command [arguments ...]] [redirection ...]"
+msgstr "exec [-cl] [-a name] [command [argument ...]] [redirection ...]"
 
 #: builtins.c:100
 msgid "exit [n]"
@@ -2451,9 +2438,8 @@ msgid "umask [-p] [-S] [mode]"
 msgstr "umask [-p] [-S] [mode]"
 
 #: builtins.c:177
-#, fuzzy
 msgid "wait [-fn] [-p var] [id ...]"
-msgstr "wait [-n] [id ...]"
+msgstr "wait [-fn] [-p var] [id ...]"
 
 #: builtins.c:181
 msgid "wait [pid ...]"
@@ -2544,29 +2530,26 @@ msgid "printf [-v var] format [arguments]"
 msgstr "printf [-v var] format [arguments]"
 
 #: builtins.c:231
-#, fuzzy
 msgid ""
 "complete [-abcdefgjksuv] [-pr] [-DEI] [-o option] [-A action] [-G globpat] [-"
 "W wordlist] [-F function] [-C command] [-X filterpat] [-P prefix] [-S "
 "suffix] [name ...]"
 msgstr ""
-"complete [-abcdefgjksuv] [-pr] [-DE] [-o option] [-A action] [-G globpat] [-"
-"W wordlist]  [-F function] [-C command] [-X filterpat] [-P prefix] [-S "
+"complete [-abcdefgjksuv] [-pr] [-DEI] [-o option] [-A action] [-G globpat] [-"
+"W wordlist] [-F function] [-C command] [-X filterpat] [-P prefix] [-S "
 "suffix] [name ...]"
 
 #: builtins.c:235
-#, fuzzy
 msgid ""
 "compgen [-abcdefgjksuv] [-o option] [-A action] [-G globpat] [-W wordlist] [-"
 "F function] [-C command] [-X filterpat] [-P prefix] [-S suffix] [word]"
 msgstr ""
-"compgen [-abcdefgjksuv] [-o option] [-A action] [-G globpat] [-W wordlist]  "
-"[-F function] [-C command] [-X filterpat] [-P prefix] [-S suffix] [word]"
+"compgen [-abcdefgjksuv] [-o option] [-A action] [-G globpat] [-W wordlist] [-"
+"F function] [-C command] [-X filterpat] [-P prefix] [-S suffix] [word]"
 
 #: builtins.c:239
-#, fuzzy
 msgid "compopt [-o|+o option] [-DEI] [name ...]"
-msgstr "compopt [-o|+o option] [-DE] [name ...]"
+msgstr "compopt [-o|+o option] [-DEI] [name ...]"
 
 #: builtins.c:242
 msgid ""
@@ -2577,13 +2560,12 @@ msgstr ""
 "callback] [-c quantum] [array]"
 
 #: builtins.c:244
-#, fuzzy
 msgid ""
 "readarray [-d delim] [-n count] [-O origin] [-s count] [-t] [-u fd] [-C "
 "callback] [-c quantum] [array]"
 msgstr ""
-"readarray [-n count] [-O origin] [-s count] [-t] [-u fd] [-C callback] [-c "
-"quantum] [array]"
+"readarray [-d delim] [-n count] [-O origin] [-s count] [-t] [-u fd] [-C "
+"callback] [-c quantum] [array]"
 
 #: builtins.c:256
 #, fuzzy
@@ -5864,34 +5846,3 @@ msgstr ""
 "ファイルから行を読み込み配列変数に代入します。\n"
 "    \n"
 "    `mapfile'の別名です。"
-
-#, fuzzy
-#~ msgid "Copyright (C) 2019 Free Software Foundation, Inc."
-#~ msgstr "Copyright (C) 2016 Free Software Foundation, Inc."
-
-#~ msgid ""
-#~ "Returns the context of the current subroutine call.\n"
-#~ "    \n"
-#~ "    Without EXPR, returns "
-#~ msgstr ""
-#~ "現在のサブルーチン呼び出しのコンテキストを返します。\n"
-#~ "    \n"
-#~ "    EXPR が無い場合、次を返します "
-
-#~ msgid "add_process: process %5ld (%s) in the_pipeline"
-#~ msgstr "add_process: プロセス %5ld (%s) が the_pipeline にあります"
-
-#~ msgid "Unknown Signal #"
-#~ msgstr "不明なシグナル番号"
-
-#~ msgid ":"
-#~ msgstr ":"
-
-#~ msgid "true"
-#~ msgstr "true"
-
-#~ msgid "false"
-#~ msgstr "false"
-
-#~ msgid "times"
-#~ msgstr "times"
