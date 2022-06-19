@@ -1,6 +1,6 @@
 /* print_command -- A way to make readable commands from a command tree. */
 
-/* Copyright (C) 1989-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2022 Free Software Foundation, Inc.
 
    This file is part of GNU Bash, the Bourne Again SHell.
 
@@ -440,7 +440,10 @@ indirection_level_string ()
     change_flag ('x', FLAG_ON);
 
   if (ps4 == 0 || *ps4 == '\0')
-    return (indirection_string);
+    {
+      FREE (ps4);
+      return (indirection_string);
+    }
 
 #if defined (HANDLE_MULTIBYTE)
   ps4_len = strnlen (ps4, MB_CUR_MAX);
@@ -956,11 +959,13 @@ void
 print_simple_command (simple_command)
      SIMPLE_COM *simple_command;
 {
-  command_print_word_list (simple_command->words, " ");
+  if (simple_command->words)
+    command_print_word_list (simple_command->words, " ");
 
   if (simple_command->redirects)
     {
-      cprintf (" ");
+      if (simple_command->words)
+	cprintf (" ");
       print_redirection_list (simple_command->redirects);
     }
 }
@@ -1050,6 +1055,9 @@ print_redirection_list (redirects)
 	  else
 	    hdtail = heredocs = newredir;
 	}
+#if 0
+      /* Remove this heuristic now that the command printing code doesn't
+	 unconditionally put in the redirector file descriptor. */
       else if (redirects->instruction == r_duplicating_output_word && (redirects->flags & REDIR_VARASSIGN) == 0 && redirects->redirector.dest == 1)
 	{
 	  /* Temporarily translate it as the execution code does. */
@@ -1059,6 +1067,7 @@ print_redirection_list (redirects)
 	  print_redirection (redirects);
 	  redirects->instruction = r_duplicating_output_word;
 	}
+#endif
       else
 	print_redirection (redirects);
 
@@ -1217,6 +1226,8 @@ print_redirection (redirect)
     case r_duplicating_input_word:
       if (redirect->rflags & REDIR_VARASSIGN)
 	cprintf ("{%s}<&%s", redir_word->word, redirectee->word);
+      else if (redirector == 0)
+	cprintf ("<&%s", redirectee->word);
       else
 	cprintf ("%d<&%s", redirector, redirectee->word);
       break;
@@ -1224,6 +1235,8 @@ print_redirection (redirect)
     case r_duplicating_output_word:
       if (redirect->rflags & REDIR_VARASSIGN)
 	cprintf ("{%s}>&%s", redir_word->word, redirectee->word);
+      else if (redirector == 1)
+	cprintf (">&%s", redirectee->word);
       else
 	cprintf ("%d>&%s", redirector, redirectee->word);
       break;

@@ -9,7 +9,7 @@ use these features.  There is a document entitled "readline.texinfo"
 which contains both end-user and programmer documentation for the
 GNU Readline Library.
 
-Copyright (C) 1988--2020 Free Software Foundation, Inc.
+Copyright (C) 1988--2022 Free Software Foundation, Inc.
 
 Authored by Brian Fox and Chet Ramey.
 
@@ -339,7 +339,8 @@ Although the Readline library comes with a set of Emacs-like
 keybindings installed by default, it is possible to use a different set
 of keybindings.
 Any user can customize programs that use Readline by putting
-commands in an @dfn{inputrc} file, conventionally in his home directory.
+commands in an @dfn{inputrc} file,
+conventionally in their home directory.
 The name of this
 @ifset BashFeatures
 file is taken from the value of the shell variable @env{INPUTRC}.  If
@@ -418,6 +419,32 @@ variables.
 @cindex variables, readline
 @table @code
 
+@item active-region-start-color
+@vindex active-region-start-color
+A string variable that controls the text color and background when displaying
+the text in the active region (see the description of
+@code{enable-active-region} below).
+This string must not take up any physical character positions on the display,
+so it should consist only of terminal escape sequences.
+It is output to the terminal before displaying the text in the active region.
+This variable is reset to the default value whenever the terminal type changes.
+The default value is the string that puts the terminal in standout mode,
+as obtained from the terminal's terminfo description.
+A sample value might be @samp{\e[01;33m}.
+
+@item active-region-end-color
+@vindex active-region-end-color
+A string variable that "undoes" the effects of @code{active-region-start-color}
+and restores "normal" terminal display appearance after displaying text
+in the active region.
+This string must not take up any physical character positions on the display,
+so it should consist only of terminal escape sequences.
+It is output to the terminal after displaying the text in the active region.
+This variable is reset to the default value whenever the terminal type changes.
+The default value is the string that restores the terminal from standout mode,
+as obtained from the terminal's terminfo description.
+A sample value might be @samp{\e[0m}.
+
 @item bell-style
 @vindex bell-style
 Controls what happens when Readline wants to ring the terminal bell.
@@ -444,6 +471,9 @@ If set to @samp{on}, when listing completions, Readline displays the
 common prefix of the set of possible completions using a different color.
 The color definitions are taken from the value of the @env{LS_COLORS}
 environment variable.
+If there is a color definition in @env{LS_COLORS} for the custom suffix
+@samp{readline-colored-completion-prefix}, Readline uses this color for
+the common prefix instead of its default.
 The default is @samp{off}.
 
 @item colored-stats
@@ -496,8 +526,9 @@ asked whether the list of possibilities should be displayed.
 If the number of possible completions is greater than or equal to this value,
 Readline will ask whether or not the user wishes to view them;
 otherwise, they are simply listed.
-This variable must be set to an integer value greater than or equal to 0.
-A negative value means Readline should never ask.
+This variable must be set to an integer value greater than or equal to zero.
+A zero value means Readline should never ask; negative values are
+treated as zero.
 The default limit is @code{100}.
 
 @item convert-meta
@@ -540,13 +571,30 @@ non-printing characters, which can be used to embed a terminal control
 sequence into the mode string.
 The default is @samp{@@}.
 
+@item enable-active-region
+@vindex enable-active-region
+The @dfn{point} is the current cursor position, and @dfn{mark} refers
+to a saved cursor position (@pxref{Commands For Moving}).
+The text between the point and mark is referred to as the @dfn{region}.
+When this variable is set to @samp{On}, Readline allows certain commands
+to designate the region as @dfn{active}.
+When the region is active, Readline highlights the text in the region using
+the value of the @code{active-region-start-color}, which defaults to the
+string that enables
+the terminal's standout mode.
+The active region shows the text inserted by bracketed-paste and any
+matching text found by incremental and non-incremental history searches.
+The default is @samp{On}.
+
 @item enable-bracketed-paste
 @vindex enable-bracketed-paste
-When set to @samp{On}, Readline will configure the terminal in a way
-that will enable it to insert each paste into the editing buffer as a
-single string of characters, instead of treating each character as if
-it had been read from the keyboard.  This can prevent pasted characters
-from being interpreted as editing commands.  The default is @samp{On}.
+When set to @samp{On}, Readline configures the terminal to insert each
+paste into the editing buffer as a single string of characters, instead
+of treating each character as if it had been read from the keyboard.
+This is called putting the terminal into @dfn{bracketed paste mode};
+it prevents Readline from executing any editing commands bound to key
+sequences appearing in the pasted text.
+The default is @samp{On}.
 
 @item enable-keypad
 @vindex enable-keypad
@@ -1332,6 +1380,11 @@ for editing.
 A numeric argument, if supplied, specifies the history entry to use instead
 of the current line.
 
+@item fetch-history ()
+With a numeric argument, fetch that entry from the history list
+and make it the current line.
+Without an argument, move back to the first entry in the history list.
+
 @end ftable
 
 @node Commands For Text
@@ -1772,6 +1825,11 @@ the output is formatted in such a way that it can be made part
 of an @var{inputrc} file.  This command is unbound by default.
 
 @ifset BashFeatures
+@item spell-correct-word (C-x s)
+Perform spelling correction on the current word, treating it as a directory
+or filename, in the same way as the @code{cdspell} shell option.
+Word boundaries are the same as those used by @code{shell-forward-word}.
+
 @item glob-complete-word (M-g)
 The word before point is treated as a pattern for pathname expansion,
 with an asterisk implicitly appended.  This pattern is used to
